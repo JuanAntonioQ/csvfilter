@@ -42,6 +42,15 @@ class CsvFilterShould {
 
         assertThat(result).isEqualTo(listOf(headerLine))
     }
+
+    @Test
+    fun tax_fields_must_be_decimals_and_exclusive(){
+        val invoiceLine = "1,02/05/2019,1000,810,XYZ,12,ACER Laptop,B76430134,"
+
+        val result = CsvFilter().filter(listOf(headerLine, invoiceLine))
+
+        assertThat(result).isEqualTo(listOf(headerLine))
+    }
 }
 
 

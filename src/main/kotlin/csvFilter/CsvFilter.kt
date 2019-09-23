@@ -13,7 +13,7 @@ class CsvFilter {
         val decimalRegex = "\\d+(\\. \\d+)?".toRegex()
         val taxFieldsAreMutuallyExclusive =
             (ivaField.matches(decimalRegex)|| igicField.matches(decimalRegex)) &&
-          (!(ivaField.matches(decimalRegex) && igicField.matches(decimalRegex)))
+            (ivaField.isNullOrEmpty() || igicField.isNullOrEmpty())
 
         if(taxFieldsAreMutuallyExclusive){
             result.add(lines[1])
