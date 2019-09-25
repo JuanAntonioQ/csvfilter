@@ -26,7 +26,9 @@ class CsvFilter {
             (ivaField.matches(decimalRegex)|| igicField.matches(decimalRegex)) &&
             (ivaField.isNullOrEmpty() || igicField.isNullOrEmpty())
 
-        val taxIdentificationFieldsAreMutuallyExclusive = cifField.isNullOrEmpty() || nifField.isNullOrEmpty()
+        val taxIdentificationFieldsAreMutuallyExclusive =
+                (cifField.isNullOrEmpty() || nifField.isNullOrEmpty()) &&
+                (!(cifField.isNullOrEmpty() && nifField.isNullOrEmpty()))
 
         var net = 0.toBigDecimal()
         if(taxFieldsAreMutuallyExclusive && !header.isNullOrEmpty() && taxIdentificationFieldsAreMutuallyExclusive){
