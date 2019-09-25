@@ -61,6 +61,15 @@ class CsvFilterShould {
         assertThat(result).isEqualTo(listOf(headerLine, invoiceLine))
     }
 
+    @Test
+    fun there_must_be_one_header_for_the_invoice(){
+        val invoiceLine = "1,02/05/2019,1000,810,19,,ACER Laptop,B76430134,"
+
+        val result = CsvFilter().filter(listOf("", invoiceLine))
+
+        assertThat(result).isEqualTo(listOf(""))
+    }
+
 }
 
 
