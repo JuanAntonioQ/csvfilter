@@ -88,6 +88,15 @@ class CsvFilterShould {
         assertThat(result).isEqualTo(listOf(headerLine))
     }
 
+    @Test
+    fun lines_with_tax_identification_fields_correct_are_not_filtered(){
+        val invoiceLine = "1,02/05/2019,1000,810,19,,ACER Laptop,B76430134,"
+
+        val result = CsvFilter().filter(listOf(headerLine, invoiceLine))
+        
+        assertThat(result).isEqualTo(listOf(headerLine, invoiceLine))
+    }
+
 }
 
 

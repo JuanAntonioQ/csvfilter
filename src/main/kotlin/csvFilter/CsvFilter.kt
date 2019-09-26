@@ -1,7 +1,5 @@
 package csvFilter
 
-import java.math.BigDecimal
-
 class CsvFilter {
     fun filter(lines: List<String>): List<String> {
         val result  = mutableListOf<String>()
@@ -31,7 +29,10 @@ class CsvFilter {
                 (!(cifField.isNullOrEmpty() && nifField.isNullOrEmpty()))
 
         var net = 0.toBigDecimal()
-        if(taxFieldsAreMutuallyExclusive && !header.isNullOrEmpty() && taxIdentificationFieldsAreMutuallyExclusive){
+        if(taxFieldsAreMutuallyExclusive               &&
+          !header.isNullOrEmpty()                      &&
+           taxIdentificationFieldsAreMutuallyExclusive &&
+          (cifField.length == 9 || nifField.length == 9)){
             if (!ivaField.isNullOrEmpty()) net = grossField.toBigDecimal() - ((grossField.toBigDecimal() * ivaField.toBigDecimal())/100.toBigDecimal())
             if (!igicField.isNullOrEmpty()) net = grossField.toBigDecimal() - ((grossField.toBigDecimal() * igicField.toBigDecimal())/100.toBigDecimal())
             if(net == netField.toBigDecimal()) result.add(lines[1])
